@@ -46,12 +46,13 @@ app.get('/search', async (request, response)=> {
 
 app.get('/get/:id', async (request, response) => {
     try {
-        let results = await collection.findOne({
+        let result = await collection.findOne({
             "_id" : ObjectId(request.params.id)
         })
+        response.send(result)
     }
-    catch(){
-
+    catch(error){
+        response.status(500).send({message: error.message})
     }
 })
 
